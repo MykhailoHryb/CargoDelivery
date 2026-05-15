@@ -1,0 +1,11 @@
+id,name,order_status_id,locale_id
+1,Waiting to approve,1,1
+2,Ожидает подтверждения,1,2
+3,Delivered,2,1
+4,Доставлен,2,2
+5,Not payed,3,1
+6,Не оплачен,3,2
+7,Payed,4,1
+8,Оплачен,4,2
+9,Canceled,5,1
+10,Отменен,5,2

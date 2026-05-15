@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="create_roles" author="mixa.jxn@gmail.com">
+        <createTable tableName="roles">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_locales" author="mixa.jxn@gmail.com">
+        <createTable tableName="locales">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="full_name" type="TEXT"/>
+            <column name="short_name" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_type_cargos" author="mixa.jxn@gmail.com">
+        <createTable tableName="types_cargos">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="img_path" type="TEXT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_type_cargos_l10n" author="mixa.jxn@gmail.com">
+        <createTable tableName="types_cargos_l10n">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(50)"/>
+            <column name="cargo_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_type_cargo_l10n" referencedColumnNames="id" referencedTableName="types_cargos"/>
+            </column>
+            <column name="locale_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_type_cargo_locale" referencedColumnNames="id" referencedTableName="locales"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_users" author="mixa.jxn@gmail.com">
+        <createTable tableName="users">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="first_name" type="varchar(50)"/>
+            <column name="last_name" type="varchar(50)"/>
+            <column name="email" type="varchar(50)"/>
+            <column name="role_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_role" referencedColumnNames="id" referencedTableName="roles"/>
+            </column>
+            <column name="password" type="CHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+<!--    <changeSet id="create_cargos" author="mixa.jxn@gmail.com">-->
+<!--        <createTable tableName="cargos">-->
+<!--            <column name="id" autoIncrement="true" type="bigint">-->
+<!--                <constraints primaryKey="true" nullable="false" />-->
+<!--            </column>-->
+<!--            <column name="weight" type="int"/>-->
+<!--            <column name="length" type="int"/>-->
+<!--            <column name="width" type="int"/>-->
+<!--            <column name="height" type="int"/>-->
+<!--            <column name="type_cargo_id" type="bigint">-->
+<!--                <constraints nullable="false" foreignKeyName="fk_type_cargo" referencedColumnNames="id" referencedTableName="types_cargos"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="create_cargos_l10n" author="mixa.jxn@gmail.com">-->
+<!--        <createTable tableName="cargos_l10n">-->
+<!--            <column autoIncrement="true" name="id" type="bigint">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(50)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="cargo_id" type="bigint">-->
+<!--                <constraints nullable="false" foreignKeyName="fk_cargo" referencedColumnNames="id" referencedTableName="cargos"/>-->
+<!--            </column>-->
+<!--            <column name="locale_id" type="bigint">-->
+<!--                <constraints nullable="false" foreignKeyName="fk_cargo_locale" referencedColumnNames="id" referencedTableName="locales"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+    <changeSet id="create_cities" author="mixa.jxn@gmail.com">
+        <createTable tableName="cities">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="latitude" type="double"/>
+            <column name="longitude" type="double"/>
+            <column name="img_path" type="TEXT"/>
+            <column name="is_foreign" type="TINYINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_cities_l10n" author="mixa.jxn@gmail.com">
+        <createTable tableName="cities_l10n">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_city" referencedColumnNames="id" referencedTableName="cities"/>
+            </column>
+            <column name="locale_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_city_locale" referencedColumnNames="id" referencedTableName="locales"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_order_statuses" author="mixa.jxn@gmail.com">
+        <createTable tableName="order_statuses">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="img_path" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_order_status_l10n" author="mixa.jxn@gmail.com">
+        <createTable tableName="order_statuses_l10n">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_status_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_order_status_l10n" referencedColumnNames="id" referencedTableName="order_statuses"/>
+            </column>
+            <column name="locale_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_order_status_locale" referencedColumnNames="id" referencedTableName="locales"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_orders" author="mixa.jxn@gmail.com">
+        <createTable tableName="orders">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_status_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_order_status" referencedColumnNames="id" referencedTableName="order_statuses"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_order_user" referencedColumnNames="id" referencedTableName="users"/>
+            </column>
+            <column name="volume" type="int"/>
+            <column name="weight" type="int"/>
+            <column name="price" type="int"/>
+            <column name="city_form_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_city_from_order" referencedColumnNames="id" referencedTableName="cities"/>
+            </column>
+            <column name="city_to_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_city_to_order" referencedColumnNames="id" referencedTableName="cities"/>
+            </column>
+            <column name="type_cargo_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_cargo_type" referencedColumnNames="id" referencedTableName="types_cargos_l10n"/>
+            </column>
+            <column name="address" type="TEXT"/>
+            <column name="receipt_path" type="TEXT"/>
+            <column name="date_created" type="date"/>
+            <column name="date_delivered" type="date"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

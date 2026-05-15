@@ -1,0 +1,7 @@
+id,latitude,longitude,img_path,is_foreign
+1,48.4647,35.0462,img/cities/dnipro.jpg,0
+2,49.8397,24.0297,img/cities/lviv.jpeg,0
+3,48.8566,2.3522,img/cities/paris.jpeg,1
+4,49.9935,36.2304,img/cities/kharkiv.jpg,0
+5,46.4825,30.7233,img/cities/odessa.jpg,0
+6,40.7128,-74.006,img/cities/new york.jpg,1
